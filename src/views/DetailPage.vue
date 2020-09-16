@@ -51,7 +51,7 @@ export default Vue.extend({
       // this.product.quantity += 1;
       // this.qty = this.product.quantity
       console.log(this.product);
-      CartService.addToCart(this.product);
+      // CartService.addToCart(this.product);
     },
   },
 });

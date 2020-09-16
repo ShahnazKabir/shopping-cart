@@ -29,7 +29,7 @@
             </span>
           </v-card-text>
           <v-card-actions>
-            <v-btn block @click="addToCart(product)" v-if="product.quantity <= product.stock">
+            <v-btn block @click="addToCart(product)" v-if="product.quantity < product.stock">
                <v-icon>mdi-cart</v-icon>
               Add To Cart
             </v-btn>
@@ -44,7 +44,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import {
-  ProductViewInterface, ProductService, Product, OldProductViewInterface,
+  ProductViewInterface, ProductService, Product, OldProductViewInterface, ProductHelper,
 } from '@/services/ProductService';
 import CartService from '@/services/CartService';
 
@@ -65,6 +65,7 @@ export default class ProductListView extends Vue {
           product.price, product.stock, product.title, product._id);
 
         this.productList.push(withQty);
+        ProductHelper.addToList(withQty);
       });
     });
   }

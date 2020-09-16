@@ -1,4 +1,7 @@
+import { Subject } from 'rxjs';
 import http from '../http-common';
+
+const list = new Subject();
 
 const ProductService = {
   getAll: () => http.get('Products'),
@@ -50,6 +53,11 @@ class Product implements ProductViewInterface {
   }
 }
 
+const ProductHelper: any = {
+  addToList: (item: ProductViewInterface) => list.next(item),
+  getList: () => list.asObservable(),
+};
+
 export {
-  Product, ProductViewInterface, ProductService, OldProductViewInterface,
+  Product, ProductViewInterface, ProductService, OldProductViewInterface, ProductHelper,
 };

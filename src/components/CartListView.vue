@@ -23,6 +23,10 @@
       <v-flex xs12>
         <p>SubTotal: {{getMySubtotal}}</p>
       </v-flex>
+      <v-flex xs12>
+        <v-btn>View Cart</v-btn>
+        <v-btn>Checkout</v-btn>
+      </v-flex>
     </v-layout>
     <v-layout v-else>
       <v-flex xs12>
@@ -54,6 +58,7 @@ export default class CartListView extends Vue {
   });
 
   get getMySubtotal() {
+    this.subtotal = 0;
     this.cartList.forEach((item) => {
       this.subtotal += item.quantity * item.price;
     });
@@ -62,6 +67,8 @@ export default class CartListView extends Vue {
 
   remove = (product: ProductViewInterface) => {
     const index: number = this.cartList.findIndex((item) => item.title === product.title);
+    const tempProduct = product;
+    tempProduct.quantity = 0;
     this.cartList.splice(index, 1);
     // CartService.removeFromCart(product);
   };
